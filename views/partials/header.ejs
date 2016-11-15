@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home | <%= title %></title>
+    <!-- CSS-->
+    <!--
+    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
+    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'/>
+    -->
+    <link rel="stylesheet" href="/stylesheets/style.css" media="screen" title="no title"/>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> -->
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header__logo">
+          <p><%= title %></p>
+        </div>
+        <!-- navigation bar with dynamic links -->
+       <nav class="nav">
+          <ul class="nav__list">
+              <% for(var i=0;i<pages.length;i++) {%>
+              <% var link='/'; if(i>0){ link = pages[i];}  %>
+            <li  class="nav__links"><a href =<%= link%>><%= pages[i]%></a></li>
+            <% } %>
+          </ul>
+        </nav>
+        <!-- Navigation ends -->
+    </div>
+  </header>
