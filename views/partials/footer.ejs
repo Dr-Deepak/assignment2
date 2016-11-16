@@ -3,13 +3,16 @@
 <Script src = "/javascripts/bootstrap.min.js"></script>
 <script src ="/javascripts/scripts.js"></script>
   <footer>
-    <div class="container">
-      <div class="footer">
-        &copy; 2016 | Deepak Sharma
-        <a href = "<%= git%>" target="blank"><i class="fa fa-github-square fa-lg" aria-hidden="true" ></i></a>
-        <a href = "<%= linkedin%>" target ="blank"><i class="fa fa-linkedin-square fa-lg" aria-hidden="true" ></i></a>
-      </div>
+    <div class="legal">
+        &copy; 2016 | <%= busName%>
     </div>
+    <div>
+      <ul class="nav__list">
+        <li class ="social_links"><a href = "<%= busfb%>" target="blank"><i class="fa fa-facebook-square fa-lg" aria-hidden="true" ></i></a></li>
+        <li class ="social_links"><a href = "<%= bustw%>" target ="blank"><i class="fa fa-twitter-square fa-lg" aria-hidden="true" ></i></a></li>
+      </ul>
+    </div>
+
 </footer>
 </body>
 </html>

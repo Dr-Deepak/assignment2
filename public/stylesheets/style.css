@@ -1,8 +1,149 @@
+
 body {
-  padding: 50px;
+  padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: hsla(0, 0%, 0%, 0.60);
+}
+header {
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 100%;
+  /*height:15px;*/
+  color: white;
+  display: flex;
+  position: fixed;
+  background-color:hsla(130, 85%, 41%, 0.28);
+  top: 0px;
+  left: -0.0px;
+}
+main {
+  background-color:hsla(0, 0%, 0%, 0.30);
+  max-width: 960px;
+  margin:87px auto;
+  height:auto;
+  padding-bottom: 50px
 }
 
-a {
-  color: #00B7FF;
+footer {
+  width: 100%;
+  background-color:hsla(130, 85%, 41%, 0.28);
+  color: white;
+  position:fixed;
+  display:flex;
+  justify-content:space-between;;
+  padding: 0;
+  bottom: 0px;
+  left:0px;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: :5px;
+}
+
+/*
+* GRID CLASSES
+*/
+
+.fourth {
+/*             Use this class whin you have to divide a div section in 4 equal sections of page width*/
+  width: 25%;
+  margin: 0;
+  float:left;
+  padding: 10px;
+}
+.third {
+  /*          Use this class whin you have to divide a div section in 3 equal sections of page width*/
+  width: 33%;
+  margin: 0;
+  float: left;
+  padding: 10px;
+}
+.half {
+  /*          Use this class whin you have to divide a div section in 2 equal sections of page width*/
+  width: 50%;
+  margin: 0;
+  float: left;
+  padding: 10px;
+}
+.full {
+  /*          Use this class whin you have to use fulll width of a page for div section*/
+  width: 100%;
+  margin: 0;
+  float: left;
+  padding: 10px;
+}
+.row {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  display: flex;
+  z-index: 100;
+}
+
+.fa{
+  color:#FFF6A1;
+}
+.social_links{
+  list-style: none;
+  padding: 10px;
+  font-size: 30px;
+}
+.fa:hover{
+  color: #00d8ff;
+}
+.legal{
+  padding : 20px 0 0 15px;
+}
+.header__logo p{
+  display: flex;
+  padding: 0 50px ;
+  font-family: 'sans-serif';
+  font-size: 30px;
+  margin: 0 5px;
+}
+.nav__list{
+    margin: 0 auto;
+    font-size: 10px;
+    padding-right: 20px;
+    float: right;
+    display:inline-flex;
+}
+.nav__links {
+  list-style: none;
+  padding: 0 5px;
+  text-transform: lowercase;
+  font-weight: bold;
+}
+.nav {
+
+}
+.nav__links a {
+  text-decoration: none;
+  font-size-adjust: auto;
+  color:inherit;
+}
+
+.nav .nav__list:hover a {
+  /*text-decoration-color: orange;*/
+  transition:0.5s;
+  color:hsla(130, 85%, 41%, 0.30);
+}
+.nav .nav__list a:hover {
+  font-size: 1.02em;
+  text-transform: capitalize;
+  color:#00d8ff;
+  transition:0.1s;
+
+}
+.background {
+  margin-top: 57px;
+  z-index: = -100;
+  /*background-color:#c1c0e5;*/
+  max-width: 100%;
+
+  }
+.background img {
+  width: 80%;
+  margin-left: 10%;
 }
