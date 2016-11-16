@@ -3,17 +3,15 @@
   <head>
     <title>Home | <%= busName%></title>
     <!-- CSS-->
-    <!--    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
-    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'/>    -->
+    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
+    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'/>   
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css" media="screen" title="no title"/>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> -->
   </head>
   <body>
     <header>
-        <div class="header__logo">
-          <p><%= title %></p>
-        </div>
+        <div><p class ="header__logo" ><%= busName%></p><p class="logoContact"><%= busPh%> | <%= busEmail%></p></div>
         <!-- navigation bar with dynamic links -->
         <nav class="nav">
           <ul class="nav__list">

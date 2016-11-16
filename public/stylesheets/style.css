@@ -6,7 +6,7 @@ body {
 }
 header {
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 8px 0;
   width: 100%;
   /*height:15px;*/
   color: white;
@@ -19,7 +19,7 @@ header {
 main {
   background-color:hsla(0, 0%, 0%, 0.30);
   max-width: 960px;
-  margin:87px auto;
+  margin:67px auto;
   height:auto;
   padding-bottom: 50px
 }
@@ -40,7 +40,10 @@ footer {
   margin: 0 auto;
   padding: :5px;
 }
-
+.logoContact{
+  padding: 0 0 0 50px;
+  display:table-cell;
+}
 /*
 * GRID CLASSES
 */
@@ -86,7 +89,7 @@ footer {
 }
 .social_links{
   list-style: none;
-  padding: 10px;
+  padding: 5px 5px 5px 5px;
   font-size: 30px;
 }
 .fa:hover{
@@ -95,7 +98,14 @@ footer {
 .legal{
   padding : 20px 0 0 15px;
 }
-.header__logo p{
+.header__logo {
+  display: flex;
+  padding: 0 50px ;
+  font-family: 'sans-serif';
+  font-size: 30px;
+  margin: 0 5px;
+}
+.header__logo div p{
   display: flex;
   padding: 0 50px ;
   font-family: 'sans-serif';
@@ -104,14 +114,14 @@ footer {
 }
 .nav__list{
     margin: 0 auto;
-    font-size: 10px;
-    padding-right: 20px;
+    font-size:14px;
+    padding: 0 20px;
     float: right;
     display:inline-flex;
 }
 .nav__links {
   list-style: none;
-  padding: 0 5px;
+  padding: 34px 0 0 18px;
   text-transform: lowercase;
   font-weight: bold;
 }
@@ -137,7 +147,7 @@ footer {
 
 }
 .background {
-  margin-top: 57px;
+  /*margin-top: 57px;*/
   z-index: = -100;
   /*background-color:#c1c0e5;*/
   max-width: 100%;
