@@ -18,10 +18,16 @@ header {
 }
 main {
   background-color: hsla(105, 61%, 36%, 0.68);
+      padding: 67px 16px 0 26px;
          max-width: 960px;
             margin: 67px auto;
-    padding-bottom: 509px;
+    height: calc(100vh - 112px);
              color: #bbe4b4;
+}
+
+.form {
+  width: 75%;
+  margin: 0 auto;
 }
 
 footer {
@@ -34,6 +40,7 @@ footer {
   padding: 0;
   bottom: 0px;
   left:0px;
+  height: 45px;
 }
 .container {
   max-width: 960px;
