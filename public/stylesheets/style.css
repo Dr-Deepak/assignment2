@@ -2,7 +2,7 @@
 body {
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: hsla(0, 0%, 0%, 0.60);
+  background-color: hsla(0, 0%, 0%, 0.89);
 }
 header {
   justify-content: space-between;
@@ -12,21 +12,21 @@ header {
   color: white;
   display: flex;
   position: fixed;
-  background-color:hsla(130, 85%, 41%, 0.28);
+  background-color:hsla(112, 264%, 56%, 0.42);
   top: 0px;
   left: -0.0px;
 }
 main {
-  background-color:hsla(0, 0%, 0%, 0.30);
-  max-width: 960px;
-  margin:67px auto;
-  height:auto;
-  padding-bottom: 50px
+  background-color: hsla(105, 61%, 36%, 0.68);
+         max-width: 960px;
+            margin: 67px auto;
+    padding-bottom: 509px;
+             color: #bbe4b4;
 }
 
 footer {
   width: 100%;
-  background-color:hsla(130, 85%, 41%, 0.28);
+  background-color:hsla(112, 264%, 56%, 0.42);
   color: white;
   position:fixed;
   display:flex;
@@ -96,7 +96,7 @@ footer {
   color: #00d8ff;
 }
 .legal{
-  padding : 20px 0 0 15px;
+  padding : 16px 0 0 15px;
 }
 .header__logo {
   display: flex;
