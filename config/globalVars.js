@@ -10,7 +10,7 @@ module.exports = {
                           facebook: {
                                       clientID:'1282717475121948',
                                       clientSecret:'75683a11202c41e978107cfd33eb4dee',
-                                      callbackURL: 'https://abcacounting.herokuapp.com/facebook/callbackRemove'/*'http://localhost:3000/facebook/callback'*/
+                                      callbackURL: 'https://abcacounting.herokuapp.com/facebook/callback'/*'http://localhost:3000/facebook/callback'*/
                                     }
                        }
                  };
