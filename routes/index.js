@@ -115,6 +115,8 @@ router.post('/register', function(req, res, next) {
       }
   );
 });
+/***Get /facebook-show fb login popup***/
+router.get('/facebook',passport.authenticate('facebook'));
 // code for 3rd party logins
 router.get('/facebook/callback',passport.authenticate('facebook',
       {
@@ -123,6 +125,7 @@ router.get('/facebook/callback',passport.authenticate('facebook',
       }
   ),
   function(req,res,next){
-  res.redirect('/teams');
+  res.redirect('/home');
 });
+
 module.exports = router;
