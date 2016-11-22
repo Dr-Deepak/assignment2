@@ -3,6 +3,7 @@ var router = express.Router();
 var busInfo = ["ABC Accounting","111-111-1111","1 abc st, Maple ON L6Y 4A2","cs@abcacounting.com","",""];
 var pages = ["home","about","clients","services","register","login","logout"];
 var Customer = require('../models/customers');
+var passport = require('passport');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Home',
@@ -27,7 +28,7 @@ router.get('/about', function(req, res, next) {
                          bustw:busInfo[5],
                          pages:pages
 
-                      });
+                       });
 });
 // Loads Clients Page
 router.get('/clients', function(req, res, next) {
@@ -70,19 +71,18 @@ router.get('/register', function(req, res, next) {
 });
 /* POST register form submission */
 router.post('/register', function(req, res, next) {
-
-  // create a new account
-  Customer.register(new Customer({ username: req.body.username }), req.body.password,
-      function(err, account) {
-        if (err) {
-          console.log(err);
-          res.redirect('/error');
+    // create a new account
+    Customer.register(new Customer({ username: req.body.username }), req.body.password, function(err, account)
+        {
+          if (err) {
+            console.log(err);
+            res.redirect('/error');
+          }
+          else {
+            res.redirect('/login', { user: req.user });
+          }
         }
-        else {
-          res.redirect('/login', { user: req.user });
-        }
-      }
-  );
+    );
 });
 // Loads services Page
 router.get('/login', function(req, res, next) {
@@ -97,7 +97,6 @@ router.get('/login', function(req, res, next) {
 
                       });
 });
-
 // \Processes input form register form
 router.post('/register', function(req, res, next) {
   // create a new customer

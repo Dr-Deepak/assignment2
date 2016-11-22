@@ -7,7 +7,29 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var app = express();
+var mongoose = require('mongoose');
+var Customer = require('./models/customers.js');
+var config = require('./config/globalVars');
+var session = require('express-session');
+var passport = require('passport');
+var localStrategy = require('passport-local').Strategy;
+var facebookStrategy= require('passport-facebook');
+var flash =require('connect-flash');
 
+mongoose.connect(config.db);
+
+app.use(flash());
+// enable sessions
+app.use(session({
+  secret: config.secret,
+  resave: true,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(Customer.createStrategy());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -53,5 +75,43 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+//configure facebook authuntication
+passport.use(
+  new facebookStrategy(
+    {  clientID : config.ids.facebook.clientID,
+    clientSecret: config.ids.facebook.clientSecret,
+     callbackURL: config.ids.facebook.callbackURL}, function(accessToken, refreshToken,profile,cb)
+    {
+      Account.findOne({oathId: profile.id},function(err,user)
+        {
+          if(err){
+            console.log(err);
+          }
+          else
+          {
+              if(!err && user!=null){// fb user exists in our db
+                cb(null,user);
+              }
+              else
+              {// create a new user
+                    user = new Customer(
+                      {
+                        oathId:profile.id,
+                        username:profile.displayName,
+                        created:Date.now
+                      }
+                    );
+                    user.save(function(err,user){
+                      if(err){
+                        console.log(err);
+                      }
+                      else{
+                        cb(null,user);
+                      }
+                    });
+              }
+          }
+      });
+    }
+));
 module.exports = app;

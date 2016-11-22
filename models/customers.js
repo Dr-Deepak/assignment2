@@ -13,3 +13,4 @@ var CustomerSchema = new mongoose.Schema
     created : {type:Date}
 });
 CustomerSchema.plugin(plm);
+module.exports = mongoose.model('Customer', CustomerSchema);
