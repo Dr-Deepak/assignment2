@@ -12,7 +12,7 @@ var config = require('./config/globalVars');
 var session = require('express-session');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
-var facebookStrategy= require('passport-facebook').Strategy;
+var facebookStrategy= require('passport-facebook');
 var flash =require('connect-flash');
 var app = express();
 mongoose.connect(config.db);
