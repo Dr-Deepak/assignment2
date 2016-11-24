@@ -6,19 +6,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var app = express();
 var mongoose = require('mongoose');
-var Customer = require('./models/customers.js');
+var Customer = require('./models/customers');
 var config = require('./config/globalVars');
 var session = require('express-session');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
-var facebookStrategy= require('passport-facebook');
+var facebookStrategy= require('passport-facebook').Strategy;
 var flash =require('connect-flash');
-
+var app = express();
 mongoose.connect(config.db);
 
 app.use(flash());
+
 // enable sessions
 app.use(session({
   secret: config.secret,
@@ -30,6 +30,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(Customer.createStrategy());
+// read and write the user to / from the session
+passport.serializeUser(Customer.serializeUser());
+passport.deserializeUser(Customer.deserializeUser());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -55,7 +58,7 @@ app.use(function(req, res, next) {
 // error handlers
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+// if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -63,7 +66,7 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
-}
+// }
 
 // production error handler
 // no stacktraces leaked to user
@@ -75,14 +78,58 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// configure local strategy
+/*
+passport.use( function(req, res, next)
+  {
+    Customer.findOne({username: req.body.username},function(err,user) {
+        if(err){
+          console.log(err);
+        }
+        else
+        {
+            if(!err && user!=null){// user exists in our db
+               cb(null,user);
+            }
+            else
+            {// create a new user
+                newCustomer = new Customer({
+                                     firstname: req.body.firstName,
+                                      lastname: req.body.lastName,
+                                           sin: req.body.sin,
+                                      username: req.body.username,
+                                      password: req.body.password,
+                                       created: Date.now
+                                   });
+                  newCustomer.save(
+                    function(err,user)
+                              {
+                                if(err){
+                                  console.log(err);
+                                }
+                                else{
+                                  cb(null,newCustomer);
+                                }
+                              }
+                  );
+            }
+        }
+    });
+  }
+);
+*/
 //configure facebook authuntication
 passport.use(
   new facebookStrategy(
     {  clientID : config.ids.facebook.clientID,
     clientSecret: config.ids.facebook.clientSecret,
-     callbackURL: config.ids.facebook.callbackURL}, function(accessToken, refreshToken,profile,cb)
+     callbackURL: config.ids.facebook.callbackURL
+    },
+    function(accessToken, refreshToken, profile, cb)
     {
-      Account.findOne({oathId: profile.id},function(err,user)
+      Customer.findOne(
+        {oathId: profile.id},
+        function(err,user)
         {
           if(err){
             console.log(err);
@@ -90,25 +137,28 @@ passport.use(
           else
           {
               if(!err && user!=null){// fb user exists in our db
-                cb(null,user);
+                 cb(null,user);
               }
               else
               {// create a new user
-                    user = new Customer(
-                      {
-                        oathId:profile.id,
-                        username:profile.displayName,
-                        created:Date.now
-                      }
+                  newCustomer = new Customer({
+                                       firstname: profile.firstName,
+                                        lastname: profile.lastName,
+                                          oathId: profile.id,
+                                        username: profile.displayName,
+                                         created: Date.now
+                                     });
+                    newCustomer.save(
+                      function(err,user)
+                                {
+                                  if(err){
+                                    console.log(err);
+                                  }
+                                  else{
+                                    return cb(null,newCustomer);
+                                  }
+                                }
                     );
-                    user.save(function(err,user){
-                      if(err){
-                        console.log(err);
-                      }
-                      else{
-                        cb(null,user);
-                      }
-                    });
               }
           }
       });

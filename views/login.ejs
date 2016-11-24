@@ -1,8 +1,6 @@
 <% include partials/header.ejs %>
-
 <main><!-- <main class="container" xmlns="http://www.w3.org/1999/html"> -->
   <h1>Login</h1>
-
   <form method="post">
     <div class="form-group">
       <label for="username" class="col-sm-2 control-label">Username: *</label>
@@ -12,15 +10,12 @@
       <label for="password" class="col-sm-2 control-label">Password: *</label>
       <input name="password" id="password" type="password" required />
     </div>
-
-    <button class="btn btn-success col-sm-offset-2">Login</button>
-    <a href="/facebook">
+    <input type= "submit" class="btn btn-success col-sm-offset-2" value="Login"/>
+    <a href="/facebook" title="Login with facebook">
       <img src="/images/facebook.png" alt="Log In with Facebook" />
     </a>
     <hr />
     Need access?  <a href="/register" title="Register">Register</a>
   </form>
-
 </main>
-
 <% include partials/footer.ejs %>

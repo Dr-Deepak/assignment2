@@ -4,7 +4,7 @@
     <title>Home | <%= busName%></title>
     <!-- CSS-->
     <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
-    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'/>   
+    <link type = "text/css" rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'/>
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css" media="screen" title="no title"/>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> -->
@@ -17,9 +17,17 @@
           <ul class="nav__list">
               <% for(var i=0;i<pages.length;i++) {%>
               <% var link='/'; if(i>0){ link = pages[i];}  %>
-            <li  class="nav__links"><a href =<%= link%>><%= pages[i]%></a></li>
+            <li class="nav__links"><a href =<%= link%>><%= pages[i]%></a></li>
             <% } %>
-          </ul>
+            <% if (!user) { %>
+               <li class="nav__links"><a href="/register">Register</a></li>
+               <li class="nav__links"><a href="/login">Login</a></li>
+            </ul>
+            <% }
+            else { %>
+               <li class="nav__links"><a href="/logout">Logout</a></li>
+               <% }%>
+        </ul>
         </nav>
         <!-- Navigation ends -->
   </header>
