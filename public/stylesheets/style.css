@@ -90,7 +90,10 @@ footer {
   display: flex;
   z-index: 100;
 }
-
+p{
+  font-weight: bold;
+  color:white;
+}
 .fa{
   color:#FFF6A1;
 }

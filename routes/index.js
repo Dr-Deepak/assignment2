@@ -68,7 +68,7 @@ router.get('/register', function(req, res, next) {
 
   // clear the session messages
   req.session.messages = [];
-  
+
 	res.render("register", { title: 'Register',
 	busName:busInfo[0],
 	busPh:busInfo[1],
@@ -76,16 +76,18 @@ router.get('/register', function(req, res, next) {
 	busEmail:busInfo[3],
 	busfb:busInfo[4],
 	bustw:busInfo[5],
-	message:messeges,
+	message:messages,
 	user: req.user,
 	pages:pages
 });
 });
 // Loads services Page
 router.get('/login', function(req, res, next) {
-	var messages = req.session.messages || []; //flash.message;
+var messages = req.session.messages || []; //flash.message;
+
 	// clear the session messages
 	req.session.messages = [];
+
 	res.render("login", { title: 'login',
 	busName:busInfo[0],
 	busPh:busInfo[1],
@@ -93,6 +95,7 @@ router.get('/login', function(req, res, next) {
 	busEmail:busInfo[3],
 	busfb:busInfo[4],
 	bustw:busInfo[5],
+	message:this.messages,
 	pages:pages,
 	user: req.user
 });
@@ -111,10 +114,14 @@ router.get('/facebook/callback',passport.authenticate('facebook',
 /* GET logout */
 router.get('/logout', function(req, res, next) {
 	// log the user out and redirect
-	req.logout();
-	res.redirect('/login');
+  req.session.destroy(function(err) {
+  if(err) {
+    console.log(err);
+  } else {
+  	res.redirect('/login');
+  }
 });
-
+});
 
 /* Error page*/
 router.get('/error', function(req, res, next) {
@@ -144,32 +151,25 @@ router.post('/register', function(req, res, next) {
 	// create a new account
 	Customer.findOne({username: req.body.username},function(err,user) {
 		if(err){
-			console.log(err+'***first if***');
+			console.log(err);
 		}
-		else if (user != null)
-		{
-			console.log(user+'2nd elseif');
-			res.redirect('/register',{message:'User already exists'});
-
-		}
-		else if(user== null)// user do not exists in our db
-		{
-			Customer.register(new Customer(
-                              				{ firstname: req.body.firstname,
+		else if (user != null){
+      req.session.messages='Already registered, please Login';
+			console.log(user);
+			res.redirect('/register');
+		}	else if(user== null){// user do not exists in our db
+			Customer.register(new Customer({ firstname: req.body.firstname,
                               					lastname: req.body.lastname,
                               					sin: req.body.sin,
                               					username: req.body.username,
                               					createdon: Date.now
-                              				}
-                                    ),
-			req.body.password,
+                              			}),	req.body.password,
 			function(err, customer){
 				if (err) {
 					console.log(err+'*****'+customer);
 					res.redirect('/error');
 				}
-				else
-				{
+				else{
 					res.redirect('/login');
 				}
 			}
@@ -178,6 +178,4 @@ router.post('/register', function(req, res, next) {
 }
 );
 });
-
-
 module.exports = router;
