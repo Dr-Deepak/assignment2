@@ -109,7 +109,7 @@ router.get('/facebook/callback',passport.authenticate('facebook',
 	failureRedirect :'/login',
 	failureMessage:'Invalid Login'
 }),  function(req,res,next){
-	res.redirect('/index');
+	res.redirect('/');
 });
 /* GET logout */
 router.get('/logout', function(req, res, next) {
