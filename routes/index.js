@@ -101,14 +101,13 @@ var messages = req.session.messages || []; //flash.message;
 });
 });
 /***Get /facebook-show fb login popup***/
-router.get('/facebook',passport.authenticate('facebook'));
+router.get('/facebook',passport.authenticate('facebook'), function(req, res, next){});
 
 // code for 3rd party logins
-router.get('/facebook/callback',passport.authenticate('facebook',
-{
-	failureRedirect :'/login',
+router.get('/facebook/callback',passport.authenticate('facebook', {
+	failureRedirect:'/login',
 	failureMessage:'Invalid Login'
-}),  function(req,res,next){
+}),  function(req, res,next){
 	res.redirect('/');
 });
 /* GET logout */
@@ -162,7 +161,7 @@ router.post('/register', function(req, res, next) {
                               					lastname: req.body.lastname,
                               					sin: req.body.sin,
                               					username: req.body.username,
-                              					createdon: Date.now
+                              					createdon: Date.now()
                               			}),	req.body.password,
 			function(err, customer){
 				if (err) {
