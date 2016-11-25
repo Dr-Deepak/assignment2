@@ -78,46 +78,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// configure local strategy
-/*
-passport.use( function(req, res, next)
-  {
-    Customer.findOne({username: req.body.username},function(err,user) {
-        if(err){
-          console.log(err);
-        }
-        else
-        {
-            if(!err && user!=null){// user exists in our db
-               cb(null,user);
-            }
-            else
-            {// create a new user
-                newCustomer = new Customer({
-                                     firstname: req.body.firstName,
-                                      lastname: req.body.lastName,
-                                           sin: req.body.sin,
-                                      username: req.body.username,
-                                      password: req.body.password,
-                                       created: Date.now
-                                   });
-                  newCustomer.save(
-                    function(err,user)
-                              {
-                                if(err){
-                                  console.log(err);
-                                }
-                                else{
-                                  cb(null,newCustomer);
-                                }
-                              }
-                  );
-            }
-        }
-    });
-  }
-);
-*/
 //configure facebook authuntication
 passport.use(
   new facebookStrategy(
@@ -127,38 +87,31 @@ passport.use(
     },
     function(accessToken, refreshToken, profile, cb)
     {
-      Customer.findOne(
-        {oathId: profile.id},
-        function(err,user)
+      Customer.findOne({oathId: profile.id },function(err,user)
         {
           if(err){
             console.log(err);
           }
           else
           {
-              if(!err && user!=null){// fb user exists in our db
-                 cb(null,user);
+              if( user !== null){// fb user exists in our db
+                console.log(user);
+                 cb(null, user);
               }
               else
               {// create a new user
-                  newCustomer = new Customer({
-                                       firstname: profile.firstName,
-                                        lastname: profile.lastName,
-                                          oathId: profile.id,
+                  user = new Customer({oathId: profile.id,
                                         username: profile.displayName,
-                                         created: Date.now
+                                         created: Date.now()
                                      });
-                    newCustomer.save(
-                      function(err,user)
-                                {
-                                  if(err){
-                                    console.log(err);
-                                  }
-                                  else{
-                                    return cb(null,newCustomer);
-                                  }
-                                }
-                    );
+                    user.save(function(err) {
+                        if(err){
+                          console.log(err);
+                        }
+                        else{
+                          cb(null, user);
+                        }
+                      });
               }
           }
       });
