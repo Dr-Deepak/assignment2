@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 	busEmail:busInfo[3],
 	busfb:busInfo[4],
 	bustw:busInfo[5],
-	user: req.user,
+	user: req.user.username,
 	pages:pages
 
 });
