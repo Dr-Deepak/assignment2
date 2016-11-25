@@ -94,6 +94,9 @@ p{
   font-weight: bold;
   color:white;
 }
+input{
+  color: black;
+}
 .fa{
   color:#FFF6A1;
 }
